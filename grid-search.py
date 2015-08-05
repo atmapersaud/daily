@@ -10,10 +10,17 @@ def main():
         r, c = map(int, sys.stdin.readline().split())
         P = [sys.stdin.readline().strip() for k in range(r)]
 
+        prev_l_pos = 0
+
         consecutive_matches = 0
         for line in G:
-            if line.find(P[consecutive_matches]) >= 0:
+            l_pos = line.find(P[consecutive_matches])
+            if l_pos >=  0:
+                if (consecutive_matches > 0) and (l_pos != prev_l_pos):
+                    consecutive_matches = 0
+                    continue
                 consecutive_matches += 1
+                prev_l_pos = l_pos
                 #print('match')
                 if consecutive_matches == r:
                     print('YES')
